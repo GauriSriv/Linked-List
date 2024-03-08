@@ -20,6 +20,7 @@ class Node
     }
 };
 
+//tc=o(n)
 
 Node * convert(vector<int>&arr)
 {
