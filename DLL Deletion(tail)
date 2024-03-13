@@ -1,0 +1,74 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node*next;
+    Node*back;
+    
+    Node(int d1,Node*n1,Node*p1)
+    {
+        data=d1;
+        next=n1;
+        back=p1;
+        }
+        
+        Node(int data1)
+        {
+            data=data1;
+            next=nullptr;
+            back=nullptr;
+        }
+};
+void print(Node*head)
+{
+    while(head!=NULL)
+    {
+        cout<<head->data<<" ";
+        head=head->next;
+    }
+    
+}
+
+Node* convert(vector<int>&arr)
+{
+    Node*head=new Node(arr[0]);
+    Node*prev=head;
+    for(int i=1;i<arr.size();i++)
+    {
+        Node*temp=new Node(arr[i],nullptr,prev);
+        prev->next=temp;
+        prev=temp;
+    }
+    return head;
+}
+Node* delete_tail(Node*head)
+{
+    if(head==NULL || head->next==NULL)
+    {
+        return NULL;
+    }
+    Node* tail=head;
+    while(tail->next!=NULL)
+    {
+        tail=tail->next;
+    }
+    Node*newTail=tail->back;
+    newTail->next=nullptr;
+    tail->back=nullptr;
+    delete tail;
+    return head;
+        
+    
+        
+    
+}
+int main()
+{
+    vector<int>arr={4,78,9,12};
+    Node*head=convert(arr);
+    head=delete_tail(head);
+    print(head);
+    return 0;
+}
